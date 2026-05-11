@@ -1369,6 +1369,20 @@ p.hero-lede {
 }
 .visit-text { font-variant-numeric: tabular-nums; }
 .visit-text #visit-count { color: var(--ink); font-weight: 600; }
+.visit-sep {
+  color: var(--card-border);
+  margin: 0 2px;
+}
+.source-link {
+  color: var(--ink-soft);
+  text-decoration: none;
+  border-bottom: 1px dotted var(--card-border);
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+.source-link:hover {
+  color: var(--ink);
+  border-bottom-color: var(--ink-soft);
+}
 .visit-dot {
   width: 8px;
   height: 8px;
