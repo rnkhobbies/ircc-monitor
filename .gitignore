@@ -1,0 +1,52 @@
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.ipynb_checkpoints/
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Node / web build artefacts
+web/node_modules/
+web/dist/
+web/.astro/
+web/.wrangler/
+
+# Raw Telegram exports — contain PII from real applicants. Do not commit.
+# Aggregated, anonymised public data lives at web/public/analytics.json.
+data/citizenship/ChatExport_*/
+
+# Local-only PDF cache (the source PDF is public; CLAUDE.md notes where to download it).
+data/citizenship_test/discover-canada.pdf
+data/citizenship_test/pages_text.json
+
+# Original Colab reference notebook has an inlined OpenAI key (and Google
+# Drive paths that don't apply locally). Keep it on disk for reference but
+# never commit it.
+notebooks/googlecolab.ipynb
+
+# Curated work product — kept private. The code that produces these is
+# committed; the data itself is not. Re-generate locally by running the
+# notebook (analytics.json) or building the bank yourself (question_bank.json).
+data/citizenship_test/question_bank.json
+web/public/citizenship_test.json
+web/public/analytics.json
+
+# Windows download-metadata streams that WSL surfaces as files
+*:Zone.Identifier
+
+# Tooling cruft
+*.log
+.cache/
+.claude/

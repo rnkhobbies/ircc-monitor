@@ -1,0 +1,152 @@
+---
+import "../../styles/global.css";
+import TestApp from "../../components/test/TestApp";
+
+const title = "Practice the Canadian citizenship test — IRCC Monitor";
+const description =
+  "Take a 20-question practice test pulled from the official Discover Canada study guide. Every answer cites the chapter and page; every option explains why it's right or wrong.";
+---
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+
+    <title>Free Canadian Citizenship Test Practice — 500 Questions from Discover Canada</title>
+    <meta
+      name="description"
+      content="Free 20-question practice test for the Canadian citizenship exam. Pulled from a 500-question bank, every answer cited to the official Discover Canada study guide. No sign-up. Mobile-friendly."
+    />
+    <meta
+      name="keywords"
+      content="Canadian citizenship test practice, Discover Canada study guide, citizenship test questions, IRCC test prep, Canada citizenship quiz, free citizenship test"
+    />
+    <meta name="author" content="Hamid Qaedi" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#c8102e" />
+    <link rel="canonical" href="https://irccmonitor.ca/test/" />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="IRCC Monitor" />
+    <meta property="og:url" content="https://irccmonitor.ca/test/" />
+    <meta property="og:title" content="Free Canadian Citizenship Test Practice — 500 Questions" />
+    <meta
+      property="og:description"
+      content="20 random questions per attempt from a 500-question bank, each one cited to the official Discover Canada page. Free, no sign-up."
+    />
+    <meta property="og:image" content="https://irccmonitor.ca/og-image.svg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="en_CA" />
+
+    <!-- Twitter / X card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Free Canadian Citizenship Test Practice" />
+    <meta
+      name="twitter:description"
+      content="20 questions, 45 minutes, every answer cited to Discover Canada. Free, no sign-up."
+    />
+    <meta name="twitter:image" content="https://irccmonitor.ca/og-image.svg" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    />
+
+    <!-- Structured data: LearningResource describing the practice test -->
+    <script type="application/ld+json" is:inline set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "LearningResource",
+      "name": "Canadian Citizenship Test — Practice Quiz",
+      "url": "https://irccmonitor.ca/test/",
+      "description": "Free, 20-question randomised practice test for the Canadian citizenship test. Drawn from a 500-question bank, with per-option explanations citing pages in the official Discover Canada study guide.",
+      "inLanguage": "en-CA",
+      "educationalLevel": "adult",
+      "learningResourceType": "Quiz",
+      "isAccessibleForFree": true,
+      "teaches": "Knowledge of Canada, the rights and responsibilities of citizenship, and content from the Discover Canada study guide.",
+      "audience": { "@type": "Audience", "audienceType": "Citizenship applicants in Canada" },
+      "publisher": { "@type": "Organization", "name": "IRCC Monitor", "url": "https://irccmonitor.ca/" }
+    })} />
+
+    <!-- Structured data: BreadcrumbList to help search engines understand site structure -->
+    <script type="application/ld+json" is:inline set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://irccmonitor.ca/" },
+        { "@type": "ListItem", "position": 2, "name": "Practice the citizenship test", "item": "https://irccmonitor.ca/test/" }
+      ]
+    })} />
+  </head>
+  <body>
+    <main class="test-main">
+      <header class="page-header compact">
+        <div class="page-header-top">
+          <a href="/" class="page-brand">
+            <span class="page-brand-logo" aria-hidden="true">
+              <svg viewBox="0 0 32 32" width="100%" height="100%" focusable="false">
+                <path
+                  fill="#c8102e"
+                  d="M16 2 l1.8 4.6 4.2 -1.5 -1 4.4 4.6 0.3 -2.7 3.7 4.3 2.5 -3.8 1.6 1.7 3.6 -4.4 -0.7 -1 4.4 -3.2 -3.1 -1.6 4.8 -1.6 -4.8 -3.2 3.1 -1 -4.4 -4.4 0.7 1.7 -3.6 -3.8 -1.6 4.3 -2.5 -2.7 -3.7 4.6 -0.3 -1 -4.4 4.2 1.5 z"
+                />
+              </svg>
+            </span>
+            <div class="page-brand-text">
+              <span class="page-brand-name">IRCC Monitor</span>
+              <span class="page-brand-tagline">
+                Community wait times and practice tools for the Canadian
+                citizenship process.
+              </span>
+            </div>
+          </a>
+          <a href="/" class="header-back">Home</a>
+        </div>
+      </header>
+
+      <aside class="disclaimer-banner" role="note">
+        <span class="disclaimer-banner-icon" aria-hidden="true">ⓘ</span>
+        <span class="disclaimer-banner-text">
+          Independent project — <strong>not affiliated with the Government of Canada or IRCC</strong>.
+          Practice-test content is drawn from the publicly available
+          <em>Discover Canada</em> study guide. For official information, visit
+          <a href="https://www.canada.ca/" rel="noopener" target="_blank">canada.ca</a>.
+        </span>
+      </aside>
+      <TestApp client:load />
+      <p class="visit-counter">
+        <span class="visit-dot" aria-hidden="true"></span>
+        <span class="visit-text">
+          <span id="visit-count">…</span> visits to this site so far
+        </span>
+      </p>
+    </main>
+    <script is:inline>
+      (async () => {
+        const el = document.getElementById("visit-count");
+        if (!el) return;
+        const SESSION_KEY = "ircc_visit_counted";
+        const alreadyCounted = sessionStorage.getItem(SESSION_KEY);
+        try {
+          const r = await fetch("/api/visits", {
+            method: alreadyCounted ? "GET" : "POST",
+          });
+          const d = await r.json();
+          if (typeof d?.total === "number") {
+            el.textContent = d.total.toLocaleString();
+            if (!alreadyCounted) sessionStorage.setItem(SESSION_KEY, "1");
+          } else {
+            el.textContent = "—";
+          }
+        } catch {
+          el.textContent = "—";
+        }
+      })();
+    </script>
+  </body>
+</html>

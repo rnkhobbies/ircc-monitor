@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# Block the question bank from being indexed as standalone JSON — search
+# engines can crawl the rendered /test/ page instead. Same for analytics.json.
+Disallow: /citizenship_test.json
+Disallow: /analytics.json
+Disallow: /api/
+
+Sitemap: https://irccmonitor.ca/sitemap-index.xml

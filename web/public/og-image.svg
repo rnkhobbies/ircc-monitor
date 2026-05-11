@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f7f5f0"/>
+      <stop offset="100%" stop-color="#efeadd"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <!-- Subtle red top stripe -->
+  <rect x="0" y="0" width="1200" height="10" fill="#c8102e"/>
+
+  <!-- Large maple leaf on the left -->
+  <g transform="translate(150 175) scale(8.0)">
+    <path
+      fill="#c8102e"
+      d="M16 2 l1.8 4.6 4.2 -1.5 -1 4.4 4.6 0.3 -2.7 3.7 4.3 2.5 -3.8 1.6 1.7 3.6 -4.4 -0.7 -1 4.4 -3.2 -3.1 -1.6 4.8 -1.6 -4.8 -3.2 3.1 -1 -4.4 -4.4 0.7 1.7 -3.6 -3.8 -1.6 4.3 -2.5 -2.7 -3.7 4.6 -0.3 -1 -4.4 4.2 1.5 z"
+    />
+  </g>
+
+  <!-- Text block on the right -->
+  <g font-family="Inter, system-ui, -apple-system, 'Segoe UI', sans-serif">
+    <text x="500" y="240" fill="#1a1a1a" font-size="68" font-weight="800" letter-spacing="-1.5">
+      IRCC Monitor
+    </text>
+    <text x="500" y="305" fill="#555555" font-size="32" font-weight="500" letter-spacing="-0.5">
+      Canadian citizenship — by the numbers
+    </text>
+
+    <text x="500" y="395" fill="#1a1a1a" font-size="26" font-weight="600">
+      ⏱  Community wait times, by city
+    </text>
+    <text x="500" y="438" fill="#1a1a1a" font-size="26" font-weight="600">
+      ✓  500-question practice test bank
+    </text>
+    <text x="500" y="481" fill="#1a1a1a" font-size="26" font-weight="600">
+      📘  Every answer cited to Discover Canada
+    </text>
+
+    <text x="500" y="555" fill="#888888" font-size="20" font-weight="500">
+      irccmonitor.ca · independent, open-source data
+    </text>
+  </g>
+</svg>

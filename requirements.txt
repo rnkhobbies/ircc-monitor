@@ -1,0 +1,11 @@
+openai>=1.0
+python-dotenv
+pandas>=2.0
+numpy
+matplotlib
+seaborn
+tqdm
+ipykernel
+nbconvert
+shapely
+pymupdf

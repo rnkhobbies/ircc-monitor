@@ -1,0 +1,492 @@
+{
+  "source": "data/citizenship_test/discover-canada.pdf",
+  "page_count": 129,
+  "chapters": [
+    {
+      "id": "applying",
+      "title": "Applying for Citizenship",
+      "pages": [
+        8,
+        10
+      ],
+      "sections": []
+    },
+    {
+      "id": "rights",
+      "title": "Rights and Responsibilities of Citizenship",
+      "pages": [
+        11,
+        15
+      ],
+      "sections": [
+        {
+          "title": "Canadian Charter of Rights and Freedoms",
+          "pages": [
+            11,
+            12
+          ]
+        },
+        {
+          "title": "The Equality of Women and Men",
+          "pages": [
+            13,
+            13
+          ]
+        },
+        {
+          "title": "Citizenship Responsibilities",
+          "pages": [
+            14,
+            15
+          ]
+        }
+      ]
+    },
+    {
+      "id": "who_we_are",
+      "title": "Who We Are",
+      "pages": [
+        16,
+        22
+      ],
+      "sections": [
+        {
+          "title": "Aboriginal and Treaty Rights",
+          "pages": [
+            17,
+            17
+          ]
+        },
+        {
+          "title": "Unity in Diversity",
+          "pages": [
+            18,
+            18
+          ]
+        },
+        {
+          "title": "English and French",
+          "pages": [
+            19,
+            20
+          ]
+        },
+        {
+          "title": "Diversity in Canada",
+          "pages": [
+            21,
+            22
+          ]
+        }
+      ]
+    },
+    {
+      "id": "history",
+      "title": "Canada's History",
+      "pages": [
+        23,
+        44
+      ],
+      "sections": [
+        {
+          "title": "Aboriginal Peoples",
+          "pages": [
+            23,
+            23
+          ]
+        },
+        {
+          "title": "The First Europeans",
+          "pages": [
+            24,
+            25
+          ]
+        },
+        {
+          "title": "The Province of Quebec",
+          "pages": [
+            26,
+            27
+          ]
+        },
+        {
+          "title": "A Growing Economy",
+          "pages": [
+            29,
+            29
+          ]
+        },
+        {
+          "title": "The War of 1812",
+          "pages": [
+            30,
+            31
+          ]
+        },
+        {
+          "title": "Rebellions of 1837-38 / Responsible Government",
+          "pages": [
+            32,
+            32
+          ]
+        },
+        {
+          "title": "Confederation",
+          "pages": [
+            33,
+            34
+          ]
+        },
+        {
+          "title": "A Railway from Sea to Sea",
+          "pages": [
+            37,
+            38
+          ]
+        },
+        {
+          "title": "Women Get the Vote",
+          "pages": [
+            40,
+            40
+          ]
+        },
+        {
+          "title": "Between the Wars",
+          "pages": [
+            42,
+            42
+          ]
+        },
+        {
+          "title": "The D-Day Invasion, June 6, 1944",
+          "pages": [
+            43,
+            44
+          ]
+        }
+      ]
+    },
+    {
+      "id": "modern",
+      "title": "Modern Canada",
+      "pages": [
+        45,
+        53
+      ],
+      "sections": [
+        {
+          "title": "Trade and Economic Growth",
+          "pages": [
+            45,
+            45
+          ]
+        },
+        {
+          "title": "International Engagement",
+          "pages": [
+            46,
+            48
+          ]
+        },
+        {
+          "title": "Arts and Culture in Canada",
+          "pages": [
+            49,
+            49
+          ]
+        },
+        {
+          "title": "Sports in Canada",
+          "pages": [
+            50,
+            50
+          ]
+        },
+        {
+          "title": "Canadian Innovators / Scientists",
+          "pages": [
+            51,
+            53
+          ]
+        }
+      ]
+    },
+    {
+      "id": "government",
+      "title": "How Canadians Govern Themselves",
+      "pages": [
+        54,
+        69
+      ],
+      "sections": [
+        {
+          "title": "Three Key Facts about Canada's System of Government",
+          "pages": [
+            54,
+            54
+          ]
+        },
+        {
+          "title": "Parliamentary Democracy",
+          "pages": [
+            55,
+            55
+          ]
+        },
+        {
+          "title": "Making Laws / How a Bill Becomes Law",
+          "pages": [
+            56,
+            56
+          ]
+        },
+        {
+          "title": "Constitutional Monarchy",
+          "pages": [
+            57,
+            57
+          ]
+        },
+        {
+          "title": "The Three Branches of Government",
+          "pages": [
+            58,
+            58
+          ]
+        },
+        {
+          "title": "Canada's System of Government (diagram)",
+          "pages": [
+            59,
+            59
+          ]
+        },
+        {
+          "title": "Federal Elections",
+          "pages": [
+            60,
+            60
+          ]
+        },
+        {
+          "title": "Voting",
+          "pages": [
+            61,
+            61
+          ]
+        },
+        {
+          "title": "Secret Ballot",
+          "pages": [
+            62,
+            62
+          ]
+        },
+        {
+          "title": "Cabinet Ministers",
+          "pages": [
+            63,
+            63
+          ]
+        },
+        {
+          "title": "Voting Procedures during an Election Period",
+          "pages": [
+            64,
+            65
+          ]
+        },
+        {
+          "title": "Other Levels of Government in Canada",
+          "pages": [
+            66,
+            69
+          ]
+        }
+      ]
+    },
+    {
+      "id": "justice",
+      "title": "The Justice System",
+      "pages": [
+        75,
+        77
+      ],
+      "sections": []
+    },
+    {
+      "id": "symbols",
+      "title": "Canadian Symbols",
+      "pages": [
+        78,
+        89
+      ],
+      "sections": [
+        {
+          "title": "Flags in Canada",
+          "pages": [
+            79,
+            79
+          ]
+        },
+        {
+          "title": "Coat of Arms and Motto",
+          "pages": [
+            80,
+            80
+          ]
+        },
+        {
+          "title": "Popular Sports",
+          "pages": [
+            81,
+            81
+          ]
+        },
+        {
+          "title": "The Beaver",
+          "pages": [
+            82,
+            82
+          ]
+        },
+        {
+          "title": "Official Languages and Bilingualism",
+          "pages": [
+            83,
+            83
+          ]
+        },
+        {
+          "title": "National Anthem (O Canada)",
+          "pages": [
+            84,
+            84
+          ]
+        },
+        {
+          "title": "Royal Anthem",
+          "pages": [
+            85,
+            85
+          ]
+        },
+        {
+          "title": "The Order of Canada and Other Honours",
+          "pages": [
+            86,
+            88
+          ]
+        },
+        {
+          "title": "National Public Holidays and Other Important Dates",
+          "pages": [
+            89,
+            89
+          ]
+        }
+      ]
+    },
+    {
+      "id": "economy",
+      "title": "Canada's Economy",
+      "pages": [
+        90,
+        92
+      ],
+      "sections": [
+        {
+          "title": "A Trading Nation",
+          "pages": [
+            90,
+            90
+          ]
+        },
+        {
+          "title": "Three Main Types of Industries",
+          "pages": [
+            91,
+            91
+          ]
+        },
+        {
+          "title": "Trade with the United States and Beyond",
+          "pages": [
+            92,
+            92
+          ]
+        }
+      ]
+    },
+    {
+      "id": "regions",
+      "title": "Canada's Regions",
+      "pages": [
+        93,
+        105
+      ],
+      "sections": [
+        {
+          "title": "The National Capital",
+          "pages": [
+            94,
+            94
+          ]
+        },
+        {
+          "title": "Region/Province/Capital reference table",
+          "pages": [
+            95,
+            95
+          ]
+        },
+        {
+          "title": "The Atlantic Provinces",
+          "pages": [
+            96,
+            97
+          ]
+        },
+        {
+          "title": "Central Canada",
+          "pages": [
+            98,
+            99
+          ]
+        },
+        {
+          "title": "The Prairie Provinces",
+          "pages": [
+            100,
+            101
+          ]
+        },
+        {
+          "title": "The West Coast (British Columbia)",
+          "pages": [
+            102,
+            102
+          ]
+        },
+        {
+          "title": "The Northern Territories",
+          "pages": [
+            103,
+            105
+          ]
+        }
+      ]
+    },
+    {
+      "id": "official_study_questions",
+      "title": "Study Questions (Official IRCC samples)",
+      "pages": [
+        106,
+        110
+      ],
+      "sections": [],
+      "note": "These are the official sample questions IRCC publishes. Mine these as a baseline for question style and difficulty."
+    }
+  ]
+}

@@ -1,0 +1,165 @@
+---
+import "../styles/global.css";
+import App from "../components/App";
+import { en } from "../lib/i18n";
+import type { Analytics } from "../lib/analytics";
+
+import analyticsRaw from "../../public/analytics.json";
+const analytics = analyticsRaw as Analytics;
+
+const t = en;
+---
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+
+    <title>How long does the Canadian citizenship process take? — IRCC Monitor</title>
+    <meta
+      name="description"
+      content="Community-sourced wait times for the Canadian citizenship process, sliced by city, application type, and submission year. Plus a 500-question practice test. Independent — not affiliated with IRCC."
+    />
+    <meta
+      name="keywords"
+      content="Canadian citizenship wait time, IRCC processing time, Canadian citizenship test practice, Discover Canada study guide, IRCC monitor, citizenship application Canada"
+    />
+    <meta name="author" content="Hamid Qaedi" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#c8102e" />
+    <link rel="canonical" href="https://irccmonitor.ca/" />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+
+    <!-- Open Graph (Facebook, LinkedIn, Discord, iMessage, etc.) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="IRCC Monitor" />
+    <meta property="og:url" content="https://irccmonitor.ca/" />
+    <meta property="og:title" content="How long does the Canadian citizenship process take? — IRCC Monitor" />
+    <meta
+      property="og:description"
+      content="Community-sourced wait times by city + a 500-question Canadian-citizenship practice test, every answer cited to Discover Canada."
+    />
+    <meta property="og:image" content="https://irccmonitor.ca/og-image.svg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="en_CA" />
+
+    <!-- Twitter / X card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="How long does the Canadian citizenship process take?" />
+    <meta
+      name="twitter:description"
+      content="Community wait times by city + a 500-question Canadian-citizenship practice test."
+    />
+    <meta name="twitter:image" content="https://irccmonitor.ca/og-image.svg" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    />
+
+    <!-- Structured data: WebSite (with sitelinks search hint) -->
+    <script type="application/ld+json" is:inline set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "IRCC Monitor",
+      "url": "https://irccmonitor.ca/",
+      "description": "Community-sourced wait times for the Canadian citizenship process and a 500-question practice test cited to Discover Canada. Independent project; not affiliated with IRCC.",
+      "inLanguage": "en-CA",
+      "publisher": {
+        "@type": "Organization",
+        "name": "IRCC Monitor",
+        "url": "https://irccmonitor.ca/",
+        "logo": "https://irccmonitor.ca/favicon.svg"
+      }
+    })} />
+
+    <!-- Structured data: Dataset describing the wait-time corpus -->
+    <script type="application/ld+json" is:inline set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Dataset",
+      "name": "Canadian citizenship wait times (community-sourced)",
+      "description": "Self-reported wait times from Canadian citizenship applicants, aggregated by city, application type, and submission year. Drawn from a public Persian-language Telegram supergroup.",
+      "url": "https://irccmonitor.ca/",
+      "creator": { "@type": "Organization", "name": "IRCC Monitor" },
+      "isAccessibleForFree": true,
+      "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "keywords": ["IRCC", "Canadian citizenship", "wait times", "processing time"]
+    })} />
+  </head>
+  <body>
+    <main>
+      <header class="page-header">
+        <div class="page-header-top">
+          <div class="page-brand">
+            <span class="page-brand-logo" aria-hidden="true">
+              <svg viewBox="0 0 32 32" width="100%" height="100%" focusable="false">
+                <path
+                  fill="#c8102e"
+                  d="M16 2 l1.8 4.6 4.2 -1.5 -1 4.4 4.6 0.3 -2.7 3.7 4.3 2.5 -3.8 1.6 1.7 3.6 -4.4 -0.7 -1 4.4 -3.2 -3.1 -1.6 4.8 -1.6 -4.8 -3.2 3.1 -1 -4.4 -4.4 0.7 1.7 -3.6 -3.8 -1.6 4.3 -2.5 -2.7 -3.7 4.6 -0.3 -1 -4.4 4.2 1.5 z"
+                />
+              </svg>
+            </span>
+            <div class="page-brand-text">
+              <span class="page-brand-name">{t.site_title}</span>
+              <span class="page-brand-tagline">
+                Community wait times and practice tools for the Canadian
+                citizenship process.
+              </span>
+            </div>
+          </div>
+          <a href="/test/" class="header-cta">Practice the test</a>
+        </div>
+        <h1 class="page-title">{t.hero_question}</h1>
+        <p class="page-lede">{t.hero_lede}</p>
+      </header>
+
+      <aside class="disclaimer-banner" role="note">
+        <span class="disclaimer-banner-icon" aria-hidden="true">ⓘ</span>
+        <span class="disclaimer-banner-text">
+          Independent project — <strong>not affiliated with the Government of Canada or IRCC</strong>.
+          All wait-time data is community-shared by applicants; practice-test
+          content is drawn from the publicly available <em>Discover Canada</em>
+          study guide. This site is not an official information source.
+        </span>
+      </aside>
+
+      <App analytics={analytics} strings={t} client:load />
+
+      <p class="footer-caveat">
+        {t.data_caveat} {t.as_of_prefix} {analytics.as_of}.
+      </p>
+      <p class="visit-counter">
+        <span class="visit-dot" aria-hidden="true"></span>
+        <span class="visit-text">
+          <span id="visit-count">…</span> visits to this site so far
+        </span>
+      </p>
+    </main>
+    <script is:inline>
+      (async () => {
+        const el = document.getElementById("visit-count");
+        if (!el) return;
+        const SESSION_KEY = "ircc_visit_counted";
+        const alreadyCounted = sessionStorage.getItem(SESSION_KEY);
+        try {
+          const r = await fetch("/api/visits", {
+            method: alreadyCounted ? "GET" : "POST",
+          });
+          const d = await r.json();
+          if (typeof d?.total === "number") {
+            el.textContent = d.total.toLocaleString();
+            if (!alreadyCounted) sessionStorage.setItem(SESSION_KEY, "1");
+          } else {
+            el.textContent = "—";
+          }
+        } catch {
+          el.textContent = "—";
+        }
+      })();
+    </script>
+  </body>
+</html>
