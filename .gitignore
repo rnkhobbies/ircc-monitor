@@ -36,6 +36,9 @@ data/citizenship_test/pages_text.json
 # never commit it.
 notebooks/googlecolab.ipynb
 
+# Local-only project memory file (lives on disk; not committed).
+CLAUDE.md
+
 # Curated work product — kept private. The code that produces these is
 # committed; the data itself is not. Re-generate locally by running the
 # notebook (analytics.json) or building the bank yourself (question_bank.json).
