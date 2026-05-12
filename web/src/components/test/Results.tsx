@@ -74,10 +74,10 @@ export default function Results({ rendered, answers, summary, onRestart }: Props
 
       <div className="test-results-actions">
         <button type="button" className="test-start-button" onClick={onRestart}>
-          Retake this test
+          New practice test
         </button>
-        <a className="test-results-link" href="/test/">
-          ← All practice tests
+        <a className="test-results-link" href="/">
+          ← Back to wait-time dashboard
         </a>
       </div>
 
