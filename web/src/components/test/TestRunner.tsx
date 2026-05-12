@@ -6,7 +6,6 @@ import type {
   TestRecord,
 } from "../../lib/citizenship_test";
 import {
-  TEST_PASS_THRESHOLD,
   TEST_QUESTION_COUNT,
   fmtClock,
   getTestQuestions,
@@ -47,15 +46,19 @@ export default function TestRunner({ bank, testId }: Props) {
     setState(s);
     const existing = s.tests[String(testId)];
     if (existing && existing.status === "completed") {
-      // User finished this test before. Show its review.
       setAnswers(existing.answers);
       setElapsed(existing.elapsedSeconds);
       setCursor(0);
       setPhase("review");
     } else if (existing && existing.status === "in_progress") {
+      // Resume at the first unanswered question; if everything's answered
+      // already, sit on the last so the user can submit.
+      const firstUnanswered = existing.answers.findIndex((a) => a == null);
+      const target =
+        firstUnanswered === -1 ? existing.answers.length - 1 : firstUnanswered;
       setAnswers(existing.answers);
       setElapsed(existing.elapsedSeconds);
-      setCursor(Math.min(existing.currentIdx, TEST_QUESTION_COUNT - 1));
+      setCursor(target);
       setPhase("in_progress");
     } else {
       setAnswers(new Array(TEST_QUESTION_COUNT).fill(null));
@@ -79,7 +82,7 @@ export default function TestRunner({ bank, testId }: Props) {
     };
   }, [phase]);
 
-  // Persist in-progress state whenever answers/cursor/elapsed change.
+  // Persist in-progress state whenever answers / cursor / elapsed change.
   useEffect(() => {
     if (phase !== "in_progress" || !state) return;
     const next: PersistedState = {
@@ -97,15 +100,16 @@ export default function TestRunner({ bank, testId }: Props) {
     saveState(next);
   }, [phase, state, testId, answers, elapsed, cursor]);
 
+  // Lock-on-click: once a question has an answer, it can't be changed.
   const onSelect = useCallback((optIdx: number) => {
     setAnswers((prev) => {
+      if (prev[cursor] != null) return prev;   // already locked
       const next = prev.slice();
       next[cursor] = optIdx;
       return next;
     });
   }, [cursor]);
 
-  const goPrev = () => setCursor((c) => Math.max(0, c - 1));
   const goNext = () => setCursor((c) => Math.min(rendered.length - 1, c + 1));
 
   const submit = useCallback(() => {
@@ -179,10 +183,11 @@ export default function TestRunner({ bank, testId }: Props) {
   // in_progress
   const current = rendered[cursor];
   const userChoice = answers[cursor];
+  const locked = userChoice != null;
+  const correctIdx = current.shuffledOptions.findIndex((o) => o.is_correct);
   const answeredCount = answers.filter((a) => a != null).length;
   const progressPct = (answeredCount / rendered.length) * 100;
   const isLast = cursor === rendered.length - 1;
-  const allAnswered = answers.every((a) => a != null);
 
   return (
     <div className="test-runner">
@@ -204,63 +209,22 @@ export default function TestRunner({ bank, testId }: Props) {
       <QuestionCard
         rendered={current}
         selected={userChoice}
-        correctIdx={-1}
-        locked={false}
+        correctIdx={correctIdx}
+        locked={locked}
         onSelect={onSelect}
       />
 
-      <div className="test-nav-row">
+      {locked && (
         <button
           type="button"
-          className="test-nav-button secondary"
-          onClick={goPrev}
-          disabled={cursor === 0}
+          className="test-advance-button"
+          onClick={isLast ? submit : goNext}
         >
-          ← Previous
+          {isLast ? "See your results →" : "Next question →"}
         </button>
-
-        <QuestionDots
-          answers={answers}
-          cursor={cursor}
-          onJump={(i) => setCursor(i)}
-        />
-
-        {isLast ? (
-          <button
-            type="button"
-            className="test-nav-button primary"
-            onClick={submit}
-            disabled={!allAnswered && !confirmSubmitEnabled(answers)}
-            title={
-              !allAnswered
-                ? `${TEST_QUESTION_COUNT - answeredCount} unanswered — submit anyway?`
-                : undefined
-            }
-          >
-            Submit test
-          </button>
-        ) : (
-          <button type="button" className="test-nav-button primary" onClick={goNext}>
-            Next →
-          </button>
-        )}
-      </div>
-
-      {isLast && !allAnswered && (
-        <p className="test-runner-submit-hint">
-          {TEST_QUESTION_COUNT - answeredCount} unanswered. You can still submit
-          — unanswered questions count as wrong.
-        </p>
       )}
     </div>
   );
-}
-
-// Submit is always enabled on the last question, but we surface the unanswered-
-// count hint. Kept as a separate function in case we want to add a confirm
-// step later.
-function confirmSubmitEnabled(_answers: (number | null)[]): boolean {
-  return true;
 }
 
 function RunnerHeader({
@@ -280,40 +244,6 @@ function RunnerHeader({
         <span className="test-runner-of"> of {total}</span>
       </div>
       <div className="test-runner-mode">{mode === "review" ? "Review" : "In progress"}</div>
-    </div>
-  );
-}
-
-function QuestionDots({
-  answers,
-  cursor,
-  onJump,
-}: {
-  answers: (number | null)[];
-  cursor: number;
-  onJump: (i: number) => void;
-}) {
-  return (
-    <div className="test-dots" role="navigation" aria-label="Jump to question">
-      {answers.map((a, i) => {
-        const cls = [
-          "test-dot",
-          a != null ? "answered" : "",
-          i === cursor ? "current" : "",
-        ].filter(Boolean).join(" ");
-        return (
-          <button
-            key={i}
-            type="button"
-            className={cls}
-            onClick={() => onJump(i)}
-            aria-label={`Go to question ${i + 1}${a != null ? " (answered)" : ""}`}
-            aria-current={i === cursor ? "true" : undefined}
-          >
-            {i + 1}
-          </button>
-        );
-      })}
     </div>
   );
 }
