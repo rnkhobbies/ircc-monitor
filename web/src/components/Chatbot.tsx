@@ -338,6 +338,7 @@ function AskMode({ stats, strings }: { stats: ChatbotStats; strings: Strings }) 
   const examples = [
     t.example_q_year,
     t.example_q_pair,
+    t.example_q_family_steps,
     t.example_q_family,
     t.example_q_total,
   ];
@@ -404,6 +405,17 @@ const MILESTONE_LABEL: Record<string, string> = {
   certificate_received_date: "certificate received",
 };
 
+// Compact milestone labels for the per-step single-vs-family comparison rows.
+const MILESTONE_SHORT: Record<string, string> = {
+  submission_date: "Submission",
+  aor_date: "AOR",
+  bg_verification_date: "Background check",
+  test_invite_date: "Test invite",
+  test_date: "Test",
+  ceremony_date: "Ceremony",
+  certificate_received_date: "Certificate",
+};
+
 // Keyword sets the matcher uses to recognize a milestone in free text.
 const MILESTONE_SYNONYMS: { key: string; words: string[] }[] = [
   { key: "submission_date", words: ["submission", "submit", "apply", "application", "applied", "sending"] },
@@ -454,6 +466,54 @@ function pairStat(
   return stats.durations.all_pairs[key] ?? null;
 }
 
+// Render one duration as "{days}d", or "too few" when the sample is thin.
+function fmtDur(
+  d: DurationStat | undefined,
+  t: Strings["chatbot"],
+  minN: number,
+): string {
+  if (!d || d.median == null || d.n < minN) return t.ans_family_steps_thin;
+  return fmt(t.ans_family_steps_value, { days: Math.round(d.median) });
+}
+
+// Single vs family, median time at each consecutive step plus the whole process.
+function familyCompareAnswer(stats: ChatbotStats, strings: Strings): ChatMsg {
+  const t = strings.chatbot;
+  const minN = stats.min_n_for_display;
+  const single = stats.durations.by_applicant.single;
+  const family = stats.durations.by_applicant.family;
+  const keys = stats.milestone_keys;
+
+  const rows: string[] = [];
+  for (let i = 0; i < keys.length - 1; i++) {
+    const key = `${keys[i]}__${keys[i + 1]}`;
+    rows.push(
+      fmt(t.ans_family_steps_row, {
+        label: `${MILESTONE_SHORT[keys[i]]} → ${MILESTONE_SHORT[keys[i + 1]]}`,
+        single: fmtDur(single.consecutive_pairs[key], t, minN),
+        family: fmtDur(family.consecutive_pairs[key], t, minN),
+      }),
+    );
+  }
+  rows.push(
+    fmt(t.ans_family_steps_row, {
+      label: t.ans_family_steps_total,
+      single: fmtDur(single.total, t, minN),
+      family: fmtDur(family.total, t, minN),
+    }),
+  );
+
+  return {
+    who: "bot",
+    text: `${t.ans_family_steps_lead}\n${rows.join("\n")}`,
+    muted: fmt(t.ans_family_steps_note, {
+      familyN: family.total.n,
+      singleN: single.total.n,
+      minN,
+    }),
+  };
+}
+
 function answerQuestion(
   raw: string,
   stats: ChatbotStats,
@@ -464,6 +524,25 @@ function answerQuestion(
   const has = (...ws: string[]) => ws.some((w) => q.includes(w));
 
   const yearMatch = q.match(/\b(20\d{2})\b/);
+
+  // ---- 0. Single vs family timing comparison (per step) ----
+  const mentionsSingle = has("single", "solo", "alone", "individual", "one person");
+  const mentionsFamily = has("family", "families", "couple", "spouse", "partner", "kids", "children");
+  const timingSignal = has(
+    "step", "stage", "milestone", "process time", "processing time", "timeline",
+    "how long", "long", "duration", "wait", "faster", "slower",
+    "longer", "shorter", "quicker", "speed",
+  );
+  const stepSignal = has(
+    "step", "stage", "milestone", "each step", "by step", "per step",
+    "at each", "timeline", "process time", "processing time",
+  );
+  if (
+    (mentionsSingle && mentionsFamily && timingSignal) ||
+    ((mentionsSingle || mentionsFamily) && stepSignal)
+  ) {
+    return familyCompareAnswer(stats, strings);
+  }
 
   // ---- 1. Duration between two milestones (check before plain counts) ----
   if (

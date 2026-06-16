@@ -230,6 +230,244 @@
         "median": 1.0,
         "n": 111
       }
+    },
+    "by_applicant": {
+      "single": {
+        "total": {
+          "median": 169.0,
+          "n": 178
+        },
+        "consecutive_pairs": {
+          "submission_date__aor_date": {
+            "median": 19.0,
+            "n": 172
+          },
+          "aor_date__bg_verification_date": {
+            "median": 45.0,
+            "n": 172
+          },
+          "bg_verification_date__test_invite_date": {
+            "median": 14.0,
+            "n": 126
+          },
+          "test_invite_date__test_date": {
+            "median": 8.0,
+            "n": 170
+          },
+          "test_date__ceremony_date": {
+            "median": 70.5,
+            "n": 172
+          },
+          "ceremony_date__certificate_received_date": {
+            "median": 0.5,
+            "n": 68
+          }
+        },
+        "all_pairs": {
+          "submission_date__aor_date": {
+            "median": 19.0,
+            "n": 172
+          },
+          "submission_date__bg_verification_date": {
+            "median": 65.0,
+            "n": 173
+          },
+          "submission_date__test_invite_date": {
+            "median": 64.0,
+            "n": 171
+          },
+          "submission_date__test_date": {
+            "median": 75.0,
+            "n": 171
+          },
+          "submission_date__ceremony_date": {
+            "median": 168.0,
+            "n": 176
+          },
+          "submission_date__certificate_received_date": {
+            "median": 165.0,
+            "n": 68
+          },
+          "aor_date__bg_verification_date": {
+            "median": 45.0,
+            "n": 172
+          },
+          "aor_date__test_invite_date": {
+            "median": 48.0,
+            "n": 169
+          },
+          "aor_date__test_date": {
+            "median": 57.0,
+            "n": 169
+          },
+          "aor_date__ceremony_date": {
+            "median": 133.0,
+            "n": 175
+          },
+          "aor_date__certificate_received_date": {
+            "median": 137.0,
+            "n": 69
+          },
+          "bg_verification_date__test_invite_date": {
+            "median": 14.0,
+            "n": 126
+          },
+          "bg_verification_date__test_date": {
+            "median": 24.5,
+            "n": 134
+          },
+          "bg_verification_date__ceremony_date": {
+            "median": 95.5,
+            "n": 174
+          },
+          "bg_verification_date__certificate_received_date": {
+            "median": 99.5,
+            "n": 68
+          },
+          "test_invite_date__test_date": {
+            "median": 8.0,
+            "n": 170
+          },
+          "test_invite_date__ceremony_date": {
+            "median": 84.0,
+            "n": 172
+          },
+          "test_invite_date__certificate_received_date": {
+            "median": 81.5,
+            "n": 68
+          },
+          "test_date__ceremony_date": {
+            "median": 70.5,
+            "n": 172
+          },
+          "test_date__certificate_received_date": {
+            "median": 69.0,
+            "n": 68
+          },
+          "ceremony_date__certificate_received_date": {
+            "median": 0.5,
+            "n": 68
+          }
+        }
+      },
+      "family": {
+        "total": {
+          "median": 170.5,
+          "n": 94
+        },
+        "consecutive_pairs": {
+          "submission_date__aor_date": {
+            "median": 22.0,
+            "n": 90
+          },
+          "aor_date__bg_verification_date": {
+            "median": 40.5,
+            "n": 90
+          },
+          "bg_verification_date__test_invite_date": {
+            "median": 10.0,
+            "n": 69
+          },
+          "test_invite_date__test_date": {
+            "median": 8.0,
+            "n": 89
+          },
+          "test_date__ceremony_date": {
+            "median": 81.5,
+            "n": 92
+          },
+          "ceremony_date__certificate_received_date": {
+            "median": 1.0,
+            "n": 40
+          }
+        },
+        "all_pairs": {
+          "submission_date__aor_date": {
+            "median": 22.0,
+            "n": 90
+          },
+          "submission_date__bg_verification_date": {
+            "median": 65.0,
+            "n": 92
+          },
+          "submission_date__test_invite_date": {
+            "median": 62.0,
+            "n": 90
+          },
+          "submission_date__test_date": {
+            "median": 71.5,
+            "n": 92
+          },
+          "submission_date__ceremony_date": {
+            "median": 169.5,
+            "n": 94
+          },
+          "submission_date__certificate_received_date": {
+            "median": 175.0,
+            "n": 41
+          },
+          "aor_date__bg_verification_date": {
+            "median": 40.5,
+            "n": 90
+          },
+          "aor_date__test_invite_date": {
+            "median": 47.0,
+            "n": 87
+          },
+          "aor_date__test_date": {
+            "median": 57.0,
+            "n": 89
+          },
+          "aor_date__ceremony_date": {
+            "median": 141.0,
+            "n": 91
+          },
+          "aor_date__certificate_received_date": {
+            "median": 138.5,
+            "n": 38
+          },
+          "bg_verification_date__test_invite_date": {
+            "median": 10.0,
+            "n": 69
+          },
+          "bg_verification_date__test_date": {
+            "median": 20.0,
+            "n": 74
+          },
+          "bg_verification_date__ceremony_date": {
+            "median": 106.5,
+            "n": 92
+          },
+          "bg_verification_date__certificate_received_date": {
+            "median": 112.5,
+            "n": 40
+          },
+          "test_invite_date__test_date": {
+            "median": 8.0,
+            "n": 89
+          },
+          "test_invite_date__ceremony_date": {
+            "median": 92.5,
+            "n": 90
+          },
+          "test_invite_date__certificate_received_date": {
+            "median": 105.0,
+            "n": 39
+          },
+          "test_date__ceremony_date": {
+            "median": 81.5,
+            "n": 92
+          },
+          "test_date__certificate_received_date": {
+            "median": 82.5,
+            "n": 40
+          },
+          "ceremony_date__certificate_received_date": {
+            "median": 1.0,
+            "n": 40
+          }
+        }
+      }
     }
   }
 }

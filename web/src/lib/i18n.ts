@@ -101,11 +101,11 @@ export const en = {
   // ---- Wait-time assistant chatbot ----
   chatbot: {
     // Launcher / header
-    launcher_label: "Ask the wait-time assistant",
-    title: "Wait-time assistant",
+    launcher_label: "Chat",
+    title: "Chat",
     subtitle: "Community data · no personal info needed",
     close: "Close",
-    open: "Open assistant",
+    open: "Open chat",
 
     // Mode switcher
     mode_estimate: "Estimate my wait",
@@ -143,6 +143,8 @@ export const en = {
     ask_send: "Ask",
     example_q_year: "How many cases were submitted in 2024?",
     example_q_pair: "How long does it take from AOR to ceremony?",
+    example_q_family_steps:
+      "Do families wait longer than single applicants at each step?",
     example_q_family: "How many single vs family applications?",
     example_q_total: "How many cases are there in total?",
 
@@ -163,6 +165,14 @@ export const en = {
       "There are {total} self-reported cases in the dataset (updated {as_of}).",
     ans_family:
       "Of {total} cases: {single} were single applicants and {family} were families ({unknown} didn't say).",
+    ans_family_steps_lead:
+      "Single vs family — typical (median) time at each step:",
+    ans_family_steps_total: "Whole process (start → certificate)",
+    ans_family_steps_row: "{label}: single {single}, family {family}",
+    ans_family_steps_value: "{days}d",
+    ans_family_steps_thin: "too few",
+    ans_family_steps_note:
+      "Family figures cover {familyN} family cases and {singleN} single cases; “too few” means under {minN} for that step. Differences this small are within community-data noise.",
     ans_city_count:
       "{n} cases are from {city}.",
     ans_city_unknown:

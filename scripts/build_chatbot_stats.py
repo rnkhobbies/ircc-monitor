@@ -71,6 +71,33 @@ def counts(records: list[dict], key: str) -> dict:
     return dict(sorted(out.items()))
 
 
+def consecutive_pairs(records: list[dict], milestone_keys: list[str]) -> dict:
+    out = {}
+    for i in range(len(milestone_keys) - 1):
+        vals = [days_between(r["dates"][i], r["dates"][i + 1]) for r in records]
+        out[f"{milestone_keys[i]}__{milestone_keys[i + 1]}"] = median_n(vals)
+    return out
+
+
+def all_pairs(records: list[dict], milestone_keys: list[str]) -> dict:
+    out = {}
+    n = len(milestone_keys)
+    for i in range(n):
+        for j in range(i + 1, n):
+            vals = [days_between(r["dates"][i], r["dates"][j]) for r in records]
+            out[f"{milestone_keys[i]}__{milestone_keys[j]}"] = median_n(vals)
+    return out
+
+
+def duration_block(records: list[dict], milestone_keys: list[str]) -> dict:
+    """The full set of duration aggregates for a (sub)set of records."""
+    return {
+        "total": median_n([total_days(r["dates"]) for r in records]),
+        "consecutive_pairs": consecutive_pairs(records, milestone_keys),
+        "all_pairs": all_pairs(records, milestone_keys),
+    }
+
+
 def main() -> None:
     analytics = json.loads(ANALYTICS_PATH.read_text())
     records: list[dict] = analytics["records"]
@@ -97,26 +124,21 @@ def main() -> None:
         "unknown": n_total - single - family,
     }
 
-    # --- pairwise milestone durations ---
-    # consecutive pairs
-    consecutive_pairs = {}
-    for i in range(len(milestone_keys) - 1):
-        a_key = milestone_keys[i]
-        b_key = milestone_keys[i + 1]
-        vals = [days_between(r["dates"][i], r["dates"][i + 1]) for r in records]
-        consecutive_pairs[f"{a_key}__{b_key}"] = median_n(vals)
+    # --- pairwise milestone durations (whole dataset) ---
+    durations = duration_block(records, milestone_keys)
 
-    # ALL ordered pairs (so "AOR to ceremony" etc. resolve directly)
-    all_pairs = {}
-    for i in range(len(milestone_keys)):
-        for j in range(len(milestone_keys)):
-            if i >= j:
-                continue
-            vals = [days_between(r["dates"][i], r["dates"][j]) for r in records]
-            all_pairs[f"{milestone_keys[i]}__{milestone_keys[j]}"] = median_n(vals)
-
-    # headline start -> end total
-    total = median_n([total_days(r["dates"]) for r in records])
+    # --- same durations split by single vs family, so the chatbot can compare
+    #     how long each step takes for solo applicants vs families ---
+    single_records = [r for r in records if r.get("applicant_count") == 1]
+    family_records = [
+        r
+        for r in records
+        if r.get("applicant_count") is not None and r["applicant_count"] >= 2
+    ]
+    durations["by_applicant"] = {
+        "single": duration_block(single_records, milestone_keys),
+        "family": duration_block(family_records, milestone_keys),
+    }
 
     # --- available date range across all milestone dates ---
     all_dates = [
@@ -141,11 +163,7 @@ def main() -> None:
             "by_certificate_type": by_certificate_type,
             "by_applicant": applicant,
         },
-        "durations": {
-            "total": total,
-            "consecutive_pairs": consecutive_pairs,
-            "all_pairs": all_pairs,
-        },
+        "durations": durations,
     }
 
     OUT_PATH.write_text(json.dumps(pack, indent=2, ensure_ascii=False, sort_keys=False) + "\n")
@@ -158,10 +176,20 @@ def main() -> None:
     print(f"  by_city ({len(by_city)} cities, sum={sum(by_city.values())})")
     print(f"  by_app_type: {by_app_type}")
     print(f"  applicant: {applicant}  (sum={sum(applicant.values())})")
+    total = durations["total"]
     print(f"  total duration: median {total['median']}d (n={total['n']})")
-    aor_cer = all_pairs.get("aor_date__ceremony_date")
+    aor_cer = durations["all_pairs"].get("aor_date__ceremony_date")
     print(f"  AOR->ceremony: median {aor_cer['median']}d (n={aor_cer['n']})")
-    print(f"  consecutive pairs: {len(consecutive_pairs)}  all ordered pairs: {len(all_pairs)}")
+    print(
+        f"  consecutive pairs: {len(durations['consecutive_pairs'])}"
+        f"  all ordered pairs: {len(durations['all_pairs'])}"
+    )
+    s_tot = durations["by_applicant"]["single"]["total"]
+    f_tot = durations["by_applicant"]["family"]["total"]
+    print(
+        f"  total wait single vs family: "
+        f"{s_tot['median']}d (n={s_tot['n']}) vs {f_tot['median']}d (n={f_tot['n']})"
+    )
 
 
 if __name__ == "__main__":

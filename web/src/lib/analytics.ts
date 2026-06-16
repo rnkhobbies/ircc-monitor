@@ -61,13 +61,18 @@ export interface ChatbotStats {
     by_certificate_type: Record<string, number>;
     by_applicant: { single: number; family: number; unknown: number };
   };
-  durations: {
-    total: DurationStat;
-    /** Keyed "<fromMilestoneKey>__<toMilestoneKey>" for adjacent milestones. */
-    consecutive_pairs: Record<string, DurationStat>;
-    /** Keyed "<fromMilestoneKey>__<toMilestoneKey>" for every ordered pair (i<j). */
-    all_pairs: Record<string, DurationStat>;
+  durations: DurationBlock & {
+    /** Same duration aggregates split by single vs family applications. */
+    by_applicant: { single: DurationBlock; family: DurationBlock };
   };
+}
+
+export interface DurationBlock {
+  total: DurationStat;
+  /** Keyed "<fromMilestoneKey>__<toMilestoneKey>" for adjacent milestones. */
+  consecutive_pairs: Record<string, DurationStat>;
+  /** Keyed "<fromMilestoneKey>__<toMilestoneKey>" for every ordered pair (i<j). */
+  all_pairs: Record<string, DurationStat>;
 }
 
 export interface Filters {
