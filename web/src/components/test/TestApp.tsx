@@ -174,8 +174,9 @@ function Intro({ bank, onStart }: { bank: QuestionBank; onStart: () => void }) {
     <div className="test-intro">
       <h1 className="test-intro-title">Practice for the citizenship test</h1>
       <p className="test-intro-lede">
-        Twenty questions, 45 minutes, exactly like the real test. Pulled from a
-        bank of {bank.questions.length} questions covering rights, history,
+        Twenty questions, 45 minutes, exactly like the real test — a mix of
+        multiple-choice and true/false, just like the official exam. Pulled from
+        a bank of {bank.questions.length} questions covering rights, history,
         government, geography, symbols, and more — every answer cites the page
         in the official <em>Discover Canada</em> study guide.
       </p>

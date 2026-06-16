@@ -11,6 +11,7 @@ export default function Feedback({ rendered, chosenIdx, correctIdx }: Props) {
   const correct = rendered.shuffledOptions[correctIdx];
   const isCorrect = chosenIdx === correctIdx;
   const sourceChapter = rendered.question.source_chapter;
+  const isTrueFalse = rendered.question.question_type === "true_false";
 
   return (
     <div className={`test-feedback ${isCorrect ? "correct" : "incorrect"}`}>
@@ -19,11 +20,19 @@ export default function Feedback({ rendered, chosenIdx, correctIdx }: Props) {
           {isCorrect ? "✓" : "✗"}
         </span>
         <span className="test-feedback-headline">
-          {isCorrect ? "Correct" : "Not quite"}
+          {isCorrect
+            ? "Correct"
+            : isTrueFalse
+              ? `Not quite — the statement is ${correct.text}`
+              : "Not quite"}
         </span>
       </div>
 
-      {!isCorrect && (
+      {/* For multiple_choice, the wrong pick has its own grounded distractor
+          annotation worth surfacing. For true_false, the single grounded
+          explanation lives on the correct option, so we skip the duplicate
+          "chosen" section and just show the explanation below. */}
+      {!isCorrect && !isTrueFalse && (
         <div className="test-feedback-section">
           <span className={`test-rel-badge rel-${chosen.annotation.relevance.toLowerCase()}`}>
             {relevanceLabel(chosen.annotation.relevance)}
@@ -43,7 +52,7 @@ export default function Feedback({ rendered, chosenIdx, correctIdx }: Props) {
       <div className="test-feedback-section">
         {!isCorrect && (
           <span className="test-rel-badge rel-correct_answer">
-            Correct answer
+            {isTrueFalse ? `Answer: ${correct.text}` : "Correct answer"}
           </span>
         )}
         <p className="test-feedback-explanation">

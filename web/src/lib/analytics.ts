@@ -37,11 +37,46 @@ export interface Analytics {
   records: Record_[];
 }
 
+// ---- Chatbot stats pack (web/public/chatbot_stats.json) ----
+// Precomputed aggregates emitted by scripts/build_chatbot_stats.py. The served
+// chatbot reads only this file (plus analytics.json for the guided estimator),
+// never an external API.
+
+export interface DurationStat {
+  median: number | null;
+  n: number;
+}
+
+export interface ChatbotStats {
+  as_of: string;
+  n_total: number;
+  min_n_for_display: number;
+  milestone_keys: string[];
+  date_range: { min: string | null; max: string | null };
+  counts: {
+    by_year: Record<string, number>;
+    by_city: Record<string, number>;
+    by_visa_office: Record<string, number>;
+    by_app_type: Record<string, number>;
+    by_certificate_type: Record<string, number>;
+    by_applicant: { single: number; family: number; unknown: number };
+  };
+  durations: {
+    total: DurationStat;
+    /** Keyed "<fromMilestoneKey>__<toMilestoneKey>" for adjacent milestones. */
+    consecutive_pairs: Record<string, DurationStat>;
+    /** Keyed "<fromMilestoneKey>__<toMilestoneKey>" for every ordered pair (i<j). */
+    all_pairs: Record<string, DurationStat>;
+  };
+}
+
 export interface Filters {
   city: string | null;
   year: string | null;
   app_type: string | null;
-  applicant_count: number | null;
+  // Single-vs-family category. "single" -> applicant_count === 1;
+  // "family" -> applicant_count >= 2 (exact family size is not reliably known).
+  applicant_count: "single" | "family" | null;
   visa_office: string | null;
   certificate_type: string | null;
 }
@@ -60,7 +95,8 @@ export function applyFilters(records: Record_[], f: Filters): Record_[] {
     if (f.city != null && r.city !== f.city) return false;
     if (f.year != null && (r.year == null || String(r.year) !== f.year)) return false;
     if (f.app_type != null && r.app_type !== f.app_type) return false;
-    if (f.applicant_count != null && r.applicant_count !== f.applicant_count) return false;
+    if (f.applicant_count === "single" && r.applicant_count !== 1) return false;
+    if (f.applicant_count === "family" && !(r.applicant_count != null && r.applicant_count >= 2)) return false;
     if (f.visa_office != null && r.visa_office !== f.visa_office) return false;
     if (f.certificate_type != null && r.certificate_type !== f.certificate_type) return false;
     return true;
@@ -197,11 +233,8 @@ export function describeFilters(f: Filters): string {
   if (f.city) parts.push(`in ${f.city}`);
   if (f.year) parts.push(`who applied in ${f.year}`);
   if (f.app_type) parts.push(f.app_type === "Online" ? "applying online" : "applying on paper");
-  if (f.applicant_count != null) {
-    if (f.applicant_count === 1) parts.push("applying solo");
-    else if (f.applicant_count === 2) parts.push("applying as a couple");
-    else parts.push(`applying as a family of ${f.applicant_count}`);
-  }
+  if (f.applicant_count === "single") parts.push("applying solo");
+  else if (f.applicant_count === "family") parts.push("applying as a family");
   if (f.visa_office) parts.push(`processed at ${f.visa_office}`);
   if (f.certificate_type) {
     parts.push(`receiving a ${f.certificate_type.toLowerCase()} certificate`);

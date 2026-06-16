@@ -12,6 +12,7 @@ const LETTERS = ["A", "B", "C", "D", "E", "F"];
 
 export default function QuestionCard({ rendered, selected, correctIdx, locked, onSelect }: Props) {
   const { question, shuffledOptions } = rendered;
+  const isTrueFalse = question.question_type === "true_false";
   return (
     <div className="test-question-card">
       <div className="test-question-meta">
@@ -21,9 +22,16 @@ export default function QuestionCard({ rendered, selected, correctIdx, locked, o
         <span className={`test-diff-badge diff-${question.difficulty}`}>
           {question.difficulty}
         </span>
+        {isTrueFalse && (
+          <span className="test-format-badge format-true_false">True or False</span>
+        )}
       </div>
       <h2 className="test-question-text">{question.question_text}</h2>
-      <div className="test-options" role="radiogroup" aria-label="Answer options">
+      <div
+        className={`test-options${isTrueFalse ? " test-options-tf" : ""}`}
+        role="radiogroup"
+        aria-label="Answer options"
+      >
         {shuffledOptions.map((_, i) => {
           // Visual state per option:
           //   - not locked: "selected" (pre-commit highlight, currently unused since we lock on click) else neutral
@@ -43,6 +51,16 @@ export default function QuestionCard({ rendered, selected, correctIdx, locked, o
           }
           const showCheckmark = locked && i === correctIdx;
           const showCross = locked && i === selected && i !== correctIdx;
+          // For true_false, the option text ("True"/"False") already conveys the
+          // choice, so the letter slot just shows the lock-state icon (or nothing
+          // before locking) rather than an "A"/"B" label.
+          const marker = showCheckmark
+            ? "✓"
+            : showCross
+              ? "✗"
+              : isTrueFalse
+                ? ""
+                : LETTERS[i];
           return (
             <button
               key={i}
@@ -50,12 +68,12 @@ export default function QuestionCard({ rendered, selected, correctIdx, locked, o
               role="radio"
               aria-checked={selected === i}
               aria-disabled={locked}
-              className={`test-option ${state}`.trim()}
+              className={`test-option ${state}${isTrueFalse ? " test-option-tf" : ""}`.trim()}
               onClick={() => !locked && onSelect(i)}
               disabled={locked}
             >
-              <span className="test-option-letter">
-                {showCheckmark ? "✓" : showCross ? "✗" : LETTERS[i]}
+              <span className="test-option-letter" aria-hidden={isTrueFalse && !marker}>
+                {marker}
               </span>
               <span className="test-option-text">{shuffledOptions[i].text}</span>
             </button>

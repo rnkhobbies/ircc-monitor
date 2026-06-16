@@ -3,6 +3,10 @@
 .env.*
 !.env.example
 
+# Telethon login session — grants full access to the Telegram account. Never commit.
+*.session
+*.session-journal
+
 # Python
 __pycache__/
 *.pyc
@@ -39,12 +43,9 @@ notebooks/googlecolab.ipynb
 # Local-only project memory file (lives on disk; not committed).
 CLAUDE.md
 
-# Curated work product — kept private. The code that produces these is
-# committed; the data itself is not. Re-generate locally by running the
-# notebook (analytics.json) or building the bank yourself (question_bank.json).
-data/citizenship_test/question_bank.json
-web/public/citizenship_test.json
-web/public/analytics.json
+# Curated work product + aggregated public data are now tracked (decided
+# 2026-06-16) so there's a recoverable snapshot — the served copies are already
+# public via the live site anyway. Raw Telegram exports (PII) stay ignored above.
 
 # Windows download-metadata streams that WSL surfaces as files
 *:Zone.Identifier

@@ -122,6 +122,7 @@ function ReviewItem({
   const correctIdx = rendered.shuffledOptions.findIndex((o) => o.is_correct);
   const isCorrect = chosen != null && rendered.shuffledOptions[chosen].is_correct;
   const isUnanswered = chosen == null;
+  const isTrueFalse = rendered.question.question_type === "true_false";
   return (
     <li className={`test-review-item ${isCorrect ? "correct" : isUnanswered ? "skipped" : "incorrect"}`}>
       <button
@@ -144,32 +145,44 @@ function ReviewItem({
               const flags: string[] = [];
               if (i === correctIdx) flags.push("correct");
               if (i === chosen) flags.push("chosen");
+              // For multiple_choice show the A/B/C/D label; for true_false the
+              // option text already reads "True"/"False" so the letter slot is
+              // dropped. We also suppress the duplicate distractor explanation
+              // on the non-correct true_false option (it mirrors the correct
+              // one's grounded note) to keep the review tidy.
+              const showMeta = !isTrueFalse || i === correctIdx;
               return (
                 <div
                   key={i}
                   className={`test-review-option ${flags.join(" ")}`}
                 >
                   <div className="test-review-option-header">
-                    <span className="test-review-option-letter">{["A","B","C","D"][i]}</span>
+                    {!isTrueFalse && (
+                      <span className="test-review-option-letter">{["A","B","C","D"][i]}</span>
+                    )}
                     <span className="test-review-option-text">{opt.text}</span>
                     {i === correctIdx && <span className="test-review-tag correct">Correct answer</span>}
                     {i === chosen && i !== correctIdx && <span className="test-review-tag your">Your answer</span>}
                   </div>
-                  <div className="test-review-option-meta">
-                    <span className={`test-rel-badge rel-${opt.annotation.relevance.toLowerCase()}`}>
-                      {relevanceLabel(opt.annotation.relevance)}
-                    </span>
-                    {opt.annotation.source_page != null && (
-                      <span className="test-review-source">
-                        {opt.annotation.source_section ?? rendered.question.source_chapter} · p. {opt.annotation.source_page}
-                      </span>
-                    )}
-                  </div>
-                  <p className="test-review-explanation">
-                    {opt.annotation.explanation}
-                  </p>
+                  {showMeta && (
+                    <>
+                      <div className="test-review-option-meta">
+                        <span className={`test-rel-badge rel-${opt.annotation.relevance.toLowerCase()}`}>
+                          {relevanceLabel(opt.annotation.relevance)}
+                        </span>
+                        {opt.annotation.source_page != null && (
+                          <span className="test-review-source">
+                            {opt.annotation.source_section ?? rendered.question.source_chapter} · p. {opt.annotation.source_page}
+                          </span>
+                        )}
+                      </div>
+                      <p className="test-review-explanation">
+                        {opt.annotation.explanation}
+                      </p>
+                    </>
+                  )}
                 </div>
-              );
+                );
             })}
           </div>
           {rendered.question.test_tip && (

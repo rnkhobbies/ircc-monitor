@@ -1,11 +1,15 @@
 ---
 import "../styles/global.css";
 import App from "../components/App";
+import Chatbot from "../components/Chatbot";
 import { en } from "../lib/i18n";
-import type { Analytics } from "../lib/analytics";
+import type { Analytics, ChatbotStats } from "../lib/analytics";
 
 import analyticsRaw from "../../public/analytics.json";
 const analytics = analyticsRaw as Analytics;
+
+import chatbotStatsRaw from "../../public/chatbot_stats.json";
+const chatbotStats = chatbotStatsRaw as ChatbotStats;
 
 const t = en;
 ---
@@ -128,6 +132,8 @@ const t = en;
       </aside>
 
       <App analytics={analytics} strings={t} client:load />
+
+      <Chatbot analytics={analytics} stats={chatbotStats} strings={t} client:load />
 
       <p class="footer-caveat">
         {t.data_caveat} {t.as_of_prefix} {analytics.as_of}.

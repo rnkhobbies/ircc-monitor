@@ -24,6 +24,8 @@ export interface OptionItem {
   annotation: Annotation;
 }
 
+export type QuestionType = "multiple_choice" | "true_false";
+
 export interface Question {
   id: string;
   topic: string;
@@ -33,7 +35,13 @@ export interface Question {
   source_section: string;
   source_page: number;
   question_text: string;
-  question_type: "multiple_choice";
+  /**
+   * "multiple_choice" → exactly 4 options.
+   * "true_false"      → exactly 2 options, {text:"True"} and {text:"False"},
+   *                     with exactly one is_correct:true. The question_text is a
+   *                     declarative statement the user judges True or False.
+   */
+  question_type: QuestionType;
   options: OptionItem[];
   tags?: string[];
   cross_references?: string[];
@@ -84,6 +92,16 @@ export interface RenderedQuestion {
 }
 
 export function renderQuestion(q: Question): RenderedQuestion {
+  // For true_false, keep a stable True-then-False order (shuffling would just
+  // flip the two buttons around with no anti-positional-bias benefit, since the
+  // labels themselves carry the meaning). For multiple_choice, shuffle so the
+  // correct answer isn't always in the same slot.
+  if (q.question_type === "true_false") {
+    const ordered = [...q.options].sort((a, b) =>
+      a.text === b.text ? 0 : a.text === "True" ? -1 : 1,
+    );
+    return { question: q, shuffledOptions: ordered };
+  }
   return { question: q, shuffledOptions: shuffle(q.options) };
 }
 

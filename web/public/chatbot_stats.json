@@ -1,0 +1,235 @@
+{
+  "as_of": "2026-06-04",
+  "n_total": 279,
+  "min_n_for_display": 3,
+  "milestone_keys": [
+    "submission_date",
+    "aor_date",
+    "bg_verification_date",
+    "test_invite_date",
+    "test_date",
+    "ceremony_date",
+    "certificate_received_date"
+  ],
+  "date_range": {
+    "min": "2020-01-20",
+    "max": "2026-11-13"
+  },
+  "counts": {
+    "by_year": {
+      "2020": 1,
+      "2022": 28,
+      "2023": 127,
+      "2024": 41,
+      "2025": 81,
+      "2026": 1
+    },
+    "by_city": {
+      "Alliston": 1,
+      "BC": 1,
+      "Barrie": 1,
+      "Belleville": 1,
+      "Bradford": 1,
+      "Burlington": 1,
+      "Calgary": 11,
+      "Edmonton": 4,
+      "Guelph": 3,
+      "Halifax": 1,
+      "Hamilton": 1,
+      "Kelowna": 1,
+      "Kingston": 1,
+      "Kirkland": 1,
+      "Kitchener": 1,
+      "Langley": 1,
+      "London": 4,
+      "Loul": 1,
+      "Markham": 2,
+      "Mississauga": 3,
+      "Montreal": 25,
+      "Montréal": 1,
+      "Newmarket": 1,
+      "Niagara": 1,
+      "North York": 2,
+      "Oakville": 2,
+      "Ottawa": 16,
+      "Regina": 1,
+      "Richmond Hill": 4,
+      "Rouyn-Noranda": 1,
+      "Saskatoon": 5,
+      "Sherbrooke": 1,
+      "St. John's": 1,
+      "Sudbury": 1,
+      "Sydney": 2,
+      "Thornhill": 1,
+      "Toronto": 77,
+      "Vancouver": 59,
+      "Vaughan": 1,
+      "Windsor": 2,
+      "Winnipeg": 2
+    },
+    "by_visa_office": {
+      "Calgary": 5,
+      "DN MBSK": 1,
+      "IRCC.DNCITVANTESTS": 1,
+      "Manitoba Saskatchewan": 1,
+      "Manitoba, Saskatchewan": 1,
+      "Manitoba/Saskatchewan": 1,
+      "Mississauga": 15,
+      "Missisuaga": 1,
+      "Montreal": 11,
+      "Montréal": 1,
+      "N/A": 1,
+      "NGF": 1,
+      "Niagara": 15,
+      "Niagara Falls": 5,
+      "Niagara-Vancouver": 1,
+      "Ottawa": 1,
+      "SCR": 3,
+      "Saskatchewan/Manitoba": 1,
+      "Saskatoon": 1,
+      "Scarborough": 44,
+      "Scarborough and Vancouver": 1,
+      "Surrey": 4,
+      "Surrey Vancouver": 2,
+      "Sydney": 27,
+      "Sydney Office": 2,
+      "Toronto": 1,
+      "United States British Columbia (Suri Kharab Shodeh)": 1,
+      "United States British India": 1,
+      "Vancouver": 33,
+      "Vancouver Downtown": 1,
+      "surrry": 1
+    },
+    "by_app_type": {
+      "Online": 266,
+      "Paper": 12
+    },
+    "by_certificate_type": {
+      "Electronic": 128,
+      "Paper": 40
+    },
+    "by_applicant": {
+      "single": 178,
+      "family": 94,
+      "unknown": 7
+    }
+  },
+  "durations": {
+    "total": {
+      "median": 168.0,
+      "n": 279
+    },
+    "consecutive_pairs": {
+      "submission_date__aor_date": {
+        "median": 19.0,
+        "n": 267
+      },
+      "aor_date__bg_verification_date": {
+        "median": 45.0,
+        "n": 266
+      },
+      "bg_verification_date__test_invite_date": {
+        "median": 12.0,
+        "n": 197
+      },
+      "test_invite_date__test_date": {
+        "median": 8.0,
+        "n": 265
+      },
+      "test_date__ceremony_date": {
+        "median": 75.0,
+        "n": 270
+      },
+      "ceremony_date__certificate_received_date": {
+        "median": 1.0,
+        "n": 111
+      }
+    },
+    "all_pairs": {
+      "submission_date__aor_date": {
+        "median": 19.0,
+        "n": 267
+      },
+      "submission_date__bg_verification_date": {
+        "median": 65.0,
+        "n": 270
+      },
+      "submission_date__test_invite_date": {
+        "median": 64.0,
+        "n": 267
+      },
+      "submission_date__test_date": {
+        "median": 74.0,
+        "n": 269
+      },
+      "submission_date__ceremony_date": {
+        "median": 167.0,
+        "n": 277
+      },
+      "submission_date__certificate_received_date": {
+        "median": 167.5,
+        "n": 112
+      },
+      "aor_date__bg_verification_date": {
+        "median": 45.0,
+        "n": 266
+      },
+      "aor_date__test_invite_date": {
+        "median": 48.0,
+        "n": 261
+      },
+      "aor_date__test_date": {
+        "median": 57.0,
+        "n": 263
+      },
+      "aor_date__ceremony_date": {
+        "median": 136.0,
+        "n": 271
+      },
+      "aor_date__certificate_received_date": {
+        "median": 137.0,
+        "n": 109
+      },
+      "bg_verification_date__test_invite_date": {
+        "median": 12.0,
+        "n": 197
+      },
+      "bg_verification_date__test_date": {
+        "median": 21.0,
+        "n": 213
+      },
+      "bg_verification_date__ceremony_date": {
+        "median": 99.0,
+        "n": 271
+      },
+      "bg_verification_date__certificate_received_date": {
+        "median": 105.0,
+        "n": 111
+      },
+      "test_invite_date__test_date": {
+        "median": 8.0,
+        "n": 265
+      },
+      "test_invite_date__ceremony_date": {
+        "median": 85.5,
+        "n": 268
+      },
+      "test_invite_date__certificate_received_date": {
+        "median": 89.5,
+        "n": 110
+      },
+      "test_date__ceremony_date": {
+        "median": 75.0,
+        "n": 270
+      },
+      "test_date__certificate_received_date": {
+        "median": 74.0,
+        "n": 111
+      },
+      "ceremony_date__certificate_received_date": {
+        "median": 1.0,
+        "n": 111
+      }
+    }
+  }
+}

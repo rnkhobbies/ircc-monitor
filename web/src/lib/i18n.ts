@@ -35,8 +35,7 @@ export const en = {
   app_type_online: "Online",
   app_type_paper: "Paper",
   applicant_count_solo: "Just me",
-  applicant_count_couple: "Couple",
-  applicant_count_family: "Family of {n}",
+  applicant_count_family_any: "A family",
   certificate_type_electronic: "Electronic",
   certificate_type_paper: "Paper",
 
@@ -98,6 +97,86 @@ export const en = {
   as_of_prefix: "Updated",
 
   switch_lang: "فارسی",
+
+  // ---- Wait-time assistant chatbot ----
+  chatbot: {
+    // Launcher / header
+    launcher_label: "Ask the wait-time assistant",
+    title: "Wait-time assistant",
+    subtitle: "Community data · no personal info needed",
+    close: "Close",
+    open: "Open assistant",
+
+    // Mode switcher
+    mode_estimate: "Estimate my wait",
+    mode_ask: "Ask a question",
+
+    // Greeting
+    greeting:
+      "Hi! I can estimate a typical wait time for your situation, or answer questions about the community data. Pick a mode below.",
+    based_on_data:
+      "All answers come from {n} self-reported cases (updated {as_of}). These are community figures, not official IRCC times.",
+
+    // Guided estimator
+    estimate_intro: "Let's narrow it down. You can skip any step.",
+    step_city: "Where do you live?",
+    step_visa_office: "Which office is processing it? (optional)",
+    step_app_type: "How did you apply?",
+    step_year: "When did you apply?",
+    skip: "Skip / any",
+    back: "Back",
+    start_over: "Start over",
+    estimate_result_lead: "For {descriptor}, the typical total wait is",
+    estimate_days: "{days} days",
+    estimate_about_months: "(about {months} months)",
+    estimate_based_on_singular: "Based on 1 shared case.",
+    estimate_based_on_plural: "Based on {n} shared cases.",
+    estimate_small_sample:
+      "Only {n} matching case(s) — too few to give a reliable number. Try removing a filter (e.g. the year or office).",
+    estimate_no_data:
+      "No matching cases yet for that combination. Try removing a filter.",
+    descriptor_anywhere: "applicants across Canada",
+
+    // Free-text Q&A
+    ask_intro: "Ask me about the community data. For example:",
+    ask_placeholder: "Type your question…",
+    ask_send: "Ask",
+    example_q_year: "How many cases were submitted in 2024?",
+    example_q_pair: "How long does it take from AOR to ceremony?",
+    example_q_family: "How many single vs family applications?",
+    example_q_total: "How many cases are there in total?",
+
+    // Q&A answer templates
+    ans_year_count:
+      "{n} of the {total} cases were submitted in {year}.",
+    ans_year_unknown:
+      "I don't have any cases recorded for {year}. The years I have data for are: {years}.",
+    ans_all_years:
+      "Cases by submission year: {breakdown}. ({total} total)",
+    ans_pair:
+      "From “{from}” to “{to}”, the typical (median) gap is {days} days (about {months} months), based on {n} cases.",
+    ans_pair_small:
+      "I only have {n} case(s) spanning “{from}” to “{to}” — too few to report a reliable figure.",
+    ans_total_duration:
+      "The typical total wait — from applying to receiving the certificate — is {days} days (about {months} months), based on {n} cases.",
+    ans_total_count:
+      "There are {total} self-reported cases in the dataset (updated {as_of}).",
+    ans_family:
+      "Of {total} cases: {single} were single applicants and {family} were families ({unknown} didn't say).",
+    ans_city_count:
+      "{n} cases are from {city}.",
+    ans_city_unknown:
+      "I don't have cases tagged for “{city}”. Cities with data include: {cities}.",
+    ans_app_type:
+      "By how people applied: {breakdown}.",
+    ans_date_range:
+      "The data spans applications and milestones from {min} to {max}.",
+
+    // Fallback
+    fallback:
+      "I don't have that stat yet. I can answer things like: case counts by year or city, single-vs-family counts, the total number of cases, the typical total wait, and how long it takes between two milestones (e.g. AOR to ceremony).",
+    milestone_list_intro: "The milestones I track are:",
+  },
 };
 
 export type Strings = typeof en;
